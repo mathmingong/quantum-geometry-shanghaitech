@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quantum Geometry · ShanghaiTech University 2026 Summer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-white: #ffffff;
+      --bg-offwhite: #f8f9fa;
+      --card-glass: rgba(255, 255, 255, 0.75);
+      --text-primary: #1a1f2e;
+      --text-secondary: #2c3e4f;
+      --accent-light: #eef2ff;
+      --border-light: rgba(0, 0, 0, 0.08);
+      --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.08);
+      --blur-bg: blur(16px);
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: var(--text-primary);
+      background: linear-gradient(145deg, #f0f4f8 0%, #e9edf2 100%);
+      overflow-x: hidden;
+      overflow-y: auto;
+      line-height: 1.5;
+    }
+
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .blur-layer {
+      position: absolute;
+      inset: -20%;
+      background: radial-gradient(circle at 30% 40%, rgba(200, 220, 250, 0.6), rgba(240, 245, 255, 0.3) 60%, transparent 80%);
+      filter: blur(80px);
+      opacity: 0.7;
+    }
+
+    .blur-layer-2 {
+      position: absolute;
+      inset: -10%;
+      background: radial-gradient(circle at 70% 60%, rgba(210, 230, 255, 0.5), rgba(230, 240, 255, 0.2) 50%, transparent 70%);
+      filter: blur(100px);
+      opacity: 0.6;
+    }
+
+    .main-content {
+      position: relative;
+      z-index: 20;
+      max-width: 2500px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+      background-color: transparent;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      pointer-events: auto;
+    }
+
+    .page-header {
+      margin-bottom: 0.5rem;
+      border-left: 4px solid #2c6e9e;
+      padding-left: 1.8rem;
+    }
+
+    .page-header h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #1a2b3e;
+      margin-bottom: 0.25rem;
+    }
+
+    .page-header .subhead {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: #2c5a7a;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+
+    .page-header .subhead span {
+      background: rgba(44, 110, 158, 0.1);
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+    }
+
+    .info-section {
+      background: var(--card-glass);
+      backdrop-filter: var(--blur-bg);
+      border-radius: 28px;
+      padding: 1.8rem 2rem 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .info-section:hover {
+      box-shadow: var(--shadow-md);
+      border-color: rgba(44, 110, 158, 0.2);
+    }
+
+    .info-section h2 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      margin-bottom: 1.25rem;
+      color: #1e3b5c;
+      border-bottom: 2px solid #cbdde9;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .lead-text {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .speaker-list {
+      display: block;
+      margin: 1.5rem 0 0.5rem;
+      padding-left: 0;
+    }
+
+    .speaker-list li {
+      list-style: none;
+      border-left: 3px solid #7fa1c3;
+      padding-left: 0.9rem;
+      margin-bottom: 0.65rem;
+      font-weight: 450;
+      color: #2c3e4f;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .participant-link {
+      background: none;
+      border: none;
+      padding: 0;
+      font: inherit;
+      color: #1e6b9e;
+      border-bottom: 1.5px dotted rgba(30, 107, 158, 0.4);
+      cursor: pointer;
+      font-weight: 500;
+      text-align: left;
+    }
+
+    .participant-link:hover {
+      color: #0a4c73;
+      border-bottom-color: #0a4c73;
+    }
+
+    .affiliation {
+      color: #5f7f9e;
+      font-size: 0.9rem;
+    }
+
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0 1rem;
+      font-size: 0.9rem;
+    }
+
+    .schedule-table th {
+      color: #1e5a88;
+      font-weight: 600;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      border-bottom: 2px solid #cbdde9;
+    }
+
+    .schedule-table td {
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid #e5eef5;
+      text-align: center;
+      color: #1e2f3e;
+    }
+
+    .schedule-table td:first-child {
+      font-weight: 500;
+      text-align: right;
+      padding-right: 1rem;
+      color: #2c6e9e;
+    }
+
+    .venue-details p, .practical-info p {
+      line-height: 1.6;
+      margin: 0.8rem 0;
+      color: #2c3e4f;
+    }
+
+    .highlights-compact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .highlight-item {
+      background: rgba(255,255,240,0.4);
+      border-radius: 40px;
+      padding: 0.2rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+      border: 1px solid #e2edf5;
+    }
+
+    .modal h3 {
+      font-size: 1.7rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #1e5a88;
+      border-bottom: 2px solid #cbdde9;
+      padding-bottom: 0.5rem;
+    }
+
+    .modal button {
+      background: transparent;
+      border: 1px solid #7fa1c3;
+      color: #1e5a88;
+      padding: 0.5rem 1.8rem;
+      border-radius: 40px;
+      cursor: pointer;
+      display: block;
+      margin-left: auto;
+    }
+
+    .footer-note {
+      margin-top: 2rem;
+      text-align: right;
+      font-size: 0.8rem;
+      color: #6f8faa;
+      border-top: 1px solid #dee8f0;
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .main-content { padding: 1.5rem; }
+      .page-header h1 { font-size: 2rem; }
+      .info-section { padding: 1.5rem; }
+      .schedule-table, .schedule-table tbody, .schedule-table tr, .schedule-table td, .schedule-table th { display: block; }
+      .schedule-table thead { display: none; }
+      .schedule-table td { text-align: left; padding: 0.5rem; border-bottom: none; }
+      .schedule-table td:first-child { font-weight: 600; background: #eef4fa; margin-top: 0.5rem; border-radius: 16px 16px 0 0; }
+      .schedule-table tr { border: 1px solid #dce7f0; margin-bottom: 1rem; border-radius: 20px; padding: 0.3rem; background: #ffffff; }
+    }
+    /* Highlight email style */
+    .highlight-email {
+      background-color: #ffecb3;
+      color: #b45f1b;
+      font-weight: 600;
+      padding: 0.1rem 0.3rem;
+      border-radius: 12px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+<div class="backdrop"><div class="blur-layer"></div><div class="blur-layer-2"></div></div>
+<div class="modal-overlay" id="modalOverlay"><div class="modal"><h3 id="modalName">Speaker</h3><p id="modalBio"></p><button id="modalCloseBtn">close</button></div></div>
+
+<main class="main-content">
+  <header class="page-header">
+    <h1>Quantum geometry: from invariants to categories, and back.</h1>
+    <div class="subhead"><span>📅 July 5–10, 2026</span><span>📍 ShanghaiTech University</span></div>
+  </header>
+
+  <section class="info-section"><h2>📐 About</h2><p class="lead-text">The conference aims to bring together scholars working on enumerative invariants, 
+      categorical invariants, mirror symmetry, algebraic geometry and symplectic geometry, 
+      to showcase the latest research progress in these areas, share recent research findings, stimulate innovative ideas, 
+      and conduct in-depth discussions on the frontier research directions in these fields.</p><br>
+<strong>Organizers:</strong> Qile Chen (Boston College), Bohan Fang (Peking University), Yunfeng Jiang (University of Kansas), Junwu Tu (ShanghaiTech).<br>
+</section>
+
+  <section class="info-section">
+    <h2>👥 Speakers (Updating)</h2>
+    <p><em>🔆 Click name for the talk information.</em></p>
+    <ul class="speaker-list" id="participantList">
+      <li><button class="participant-link" data-name="Lino Amorim">Lino Amorim</button> <span class="affiliation">(Kansas State University)</span></li>
+      <li><button class="participant-link" data-name="Christ Brav">Christ Brav</button> <span class="affiliation">(SIMIS, Shanghai)</span></li>
+      <li><button class="participant-link" data-name="Andrei Caldararu">Andrei Căldăraru</button> <span class="affiliation">(UW Madison)</span></li>
+      <li><button class="participant-link" data-name="Kwok-Wai Chan">Kwok-Wai Chan</button> <span class="affiliation">(Chinese University of Hong Kong)</span></li>
+      <li><button class="participant-link" data-name="Yash Deshmukh">Yash Deshmukh</button> <span class="affiliation">(IAS Princeton)</span></li>
+      <li><button class="participant-link" data-name="Huijun Fan">Huijun Fan</button> <span class="affiliation">(Wuhan University)</span></li>
+      <li><button class="participant-link" data-name="Sheel Ganatra">Sheel Ganatra</button> <span class="affiliation">(USC)</span></li>
+      <li><button class="participant-link" data-name="Ezra Getzler">Ezra Getzler</button> <span class="affiliation">(Northwestern)</span></li>
+      <li><button class="participant-link" data-name="Jianxun Hu">Jianxun Hu</button> <span class="affiliation">(Sun Yat-Sen)</span></li>
+      <li><button class="participant-link" data-name="Kai Hugtenburg">Kai Hugtenburg</button> <span class="affiliation">(University of St Andrews)</span></li>
+      <li><button class="participant-link" data-name="Si Li">Si Li</button> <span class="affiliation">(Tsinghua University)</span></li>
+      <li><button class="participant-link" data-name="Patrick Lei">Patrick Lei</button> <span class="affiliation">(Boston College)</span></li>
+      <li><button class="participant-link" data-name="Conan Leung">Conan Leung (TBC) </button> <span class="affiliation">(Chinese University of Hong Kong)</span></li>
+      <li><button class="participant-link" data-name="Emanuele Macri">Emanuele Macrì</button> <span class="affiliation">(Paris-Saclay)</span></li>
+      <li><button class="participant-link" data-name="Samouil Molcho">Samouil Molcho</button> <span class="affiliation">(ETH Zurich)</span></li>
+      <li><button class="participant-link" data-name="Dhruv Ranganathan">Dhruv Ranganathan</button> <span class="affiliation">(Cambridge)</span></li>
+      <li><button class="participant-link" data-name="Yongbin Ruan">Yongbin Ruan (TBC) </button> <span class="affiliation">(IASM, Zhejiang University)</span></li>
+      <li><button class="participant-link" data-name="Vivek Shende">Vivek Shende</button> <span class="affiliation">(Southern Denmark)</span></li>
+      <li><button class="participant-link" data-name="Fenglong You">Fenglong You</button> <span class="affiliation">(QMUL)</span></li>
+      <li><button class="participant-link" data-name="Zijun Zhou">Zijun Zhou</button> <span class="affiliation">(Shanghai Jiaotong University)</span></li>
+    </ul>
+  </section>
+
+  <section class="info-section">
+    <h2>📅 Schedule</h2>
+    <table class="schedule-table">
+      <thead><tr><th>Time</th><th>Mon 6</th><th>Tue 7</th><th>Wed 8</th><th>Thu 9</th><th>Fri 10</th></tr></thead>
+      <tbody>
+        <tr><td>9:30-10:30</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
+        <tr><td>11:00-12:00</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td><td>TBA</td></tr>
+        <tr><td>2:00-3:00</td><td>TBA</td><td>TBA</td><td>Free Discussion</td><td>TBA</td><td>TBA</td></tr>
+        <tr><td>3:15-4:15</td><td>TBA</td><td>TBA</td><td>Free Discussion</td><td>TBA</td><td>TBA</td></tr>
+        <tr><td>4:30-5:30</td><td>TBA</td><td>TBA</td><td>Free Discussion</td><td>TBA</td><td>TBA</td></tr>
+        <tr><td>6:00-9:00</td><td></td><td></td><td>Conference Dinner</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="info-section">
+    <h2>📍 Venue</h2>    <div class="venue-details">
+      <p><strong> Conference Room:</strong> ShanghaiTech University Campus (details to be announced). <br>
+      <strong>Conference dinner:</strong> Wednesday Night (details to be announced). <br>
+      </p>
+    </div>
+  </section>
+
+  <section class="info-section practical-info">
+    <h2>📋 Practical info</h2>
+    <p>
+    <strong>Online registration:</strong> <a href="https://f66hjtjp.jsjform.com/f/aKZ2hi" target="_blank" rel="noopener noreferrer">https://f66hjtjp.jsjform.com/f/aKZ2hi. </a> (Please email us at huangchg2025@shanghaitech.edu.cn if you have any questions.)<br>
+    <strong>Financial support:</strong> Limited grants for graduate students. Otherwise, participates are expected to cover their own expenses. We shall provide invitation letter if needed. <br>
+    <strong>Funding resources:</strong> ShanghaiTech & National Key Research and Development Program of China.<br>
+    <strong>Internet:</strong> eduroam / ShanghaiTech guest Wi-Fi.<br>
+    <strong>Hotel address (for speakers):</strong> Aloft Shanghai Zhangjiang Haike, No. 550 Haike Rd., Pudong new district, Shanghai.
+     </p>
+  
+  <footer class="footer-note">ShanghaiTech University · Quantum Geometry · 2026</footer>
+</main>
+
+<script>
+  (function() {
+    const overlay = document.getElementById('modalOverlay');
+    const modalName = document.getElementById('modalName');
+    const modalBio = document.getElementById('modalBio');
+    const closeBtn = document.getElementById('modalCloseBtn');
+    function showModal(name) {
+      modalName.textContent = name;
+      modalBio.textContent = `📌 ${name}: TBA (talk title and abstract to be announced).`;
+      overlay.style.display = 'flex';
+    }
+    function closeModal() { overlay.style.display = 'none'; }
+    document.querySelectorAll('.participant-link').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showModal(btn.getAttribute('data-name') || btn.textContent.replace(/\*/g,'').trim());
+      });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.style.display === 'flex') closeModal(); });
+  })();
+</script>
+</body>
+</html>
