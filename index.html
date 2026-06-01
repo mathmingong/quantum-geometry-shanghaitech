@@ -295,6 +295,18 @@
       border-radius: 12px;
       display: inline-block;
     }
+    /* Taxi note box */
+    .taxi-note {
+      background: #fef7e0;
+      border-left: 5px solid #f1c40f;
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0;
+      border-radius: 16px;
+      font-size: 0.95rem;
+    }
+    .taxi-note strong {
+      color: #b45f1b;
+    }
   </style>
 </head>
 <body>
@@ -335,9 +347,11 @@
       <li><button class="participant-link" data-name="Samouil Molcho">Samouil Molcho</button> <span class="affiliation">(ETH Zurich)</span></li>
       <li><button class="participant-link" data-name="Dhruv Ranganathan">Dhruv Ranganathan</button> <span class="affiliation">(Cambridge)</span></li>
       <li><button class="participant-link" data-name="Yongbin Ruan">Yongbin Ruan (TBC) </button> <span class="affiliation">(IASM, Zhejiang University)</span></li>
+      <li><button class="participant-link" data-name="Yefeng Shen">Yefeng Shen</button> <span class="affiliation">(University of Oregon)</span></li>
       <li><button class="participant-link" data-name="Vivek Shende">Vivek Shende</button> <span class="affiliation">(Southern Denmark)</span></li>
       <li><button class="participant-link" data-name="Fenglong You">Fenglong You</button> <span class="affiliation">(QMUL)</span></li>
       <li><button class="participant-link" data-name="Zijun Zhou">Zijun Zhou</button> <span class="affiliation">(Shanghai Jiaotong University)</span></li>
+      <li><button class="participant-link" data-name="Zhengyu Zong">Zhengyu Zong</button> <span class="affiliation">(Tsinghua University)</span></li>
     </ul>
   </section>
 
@@ -373,6 +387,42 @@
     <strong>Internet:</strong> eduroam / ShanghaiTech guest Wi-Fi.<br>
     <strong>Hotel address (for speakers):</strong> Aloft Shanghai Zhangjiang Haike, No. 550 Haike Rd., Pudong new district, Shanghai.
      </p>
+  </section>
+
+  <!-- Transportation section (taxi note, only airports, destination = hotel) -->
+  <section class="info-section">
+    <h2>🚆 Transportation to Hotel</h2>
+    <h3 style="font-weight:500; margin: 1rem 0 0.5rem;">✨ Quick overview</h3>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; margin:0.5rem 0 1rem;">
+        <thead><tr style="background:#eef4fa;"><th style="padding:8px; text-align:left;">From / To Aloft Shanghai Zhangjiang Haike</th><th style="padding:8px;">Taxi (time / est. cost)</th><th style="padding:8px;">Metro (approx. time)</th></tr></thead>
+        <tbody>
+          <tr><td style="padding:8px; border-bottom:1px solid #e2edf5;"><strong>Pudong Airport (PVG)</strong></td><td style="padding:8px; border-bottom:1px solid #e2edf5;">~25 min / ¥90‑100</td><td style="padding:8px; border-bottom:1px solid #e2edf5;">~1h11min (Line 2→16→13)</td></tr>
+          <tr><td style="padding:8px;"><strong>Hongqiao Airport / Hongqiao Railway</strong></td><td style="padding:8px;">~40‑50 min / ¥140‑150</td><td style="padding:8px;">~1h14min (Line 10→13)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Taxi note for foreigners: show to driver (hotel address) -->
+    <div class="taxi-note">
+      <strong>🚕 For taxi drivers – show this to the driver (English & Chinese):</strong><br>
+      <span style="font-size:1.1rem;">Please take me to Aloft Shanghai Zhangjiang Haike, No. 550 Haike Road, Pudong.</span><br>
+      <span style="font-size:1.3rem; font-weight:500;">请送我到：上海市浦东新区海科路550号 上海张江海科雅乐轩酒店</span><br>
+      <span style="font-size:0.85rem; color:#5a6e7c;">(If using ride-hailing apps like Didi, you can paste the Chinese address directly.)</span>
+    </div>
+
+    <h3 style="font-weight:500; margin:1rem 0 0.5rem;">✈️ From Pudong Airport (PVG)</h3>
+    <p><strong>Taxi (recommended)</strong>: about 25 minutes, ~¥90‑100.<br>
+    <strong>Metro</strong>: Line 2 → at Longyang Road transfer to <strong>Line 16</strong> → at Huaxia Middle Road transfer to <strong>Line 13</strong> → get off at <strong>Zhongke Road Station</strong>, Exit 5. Then about 800m walk or a short taxi ride to the hotel. Total ~1h11min.</p>
+
+    <h3 style="font-weight:500; margin:1rem 0 0.5rem;">🛫 From Hongqiao Airport / Hongqiao Railway Station</h3>
+    <p><strong>Taxi (recommended)</strong>: about 40‑50 minutes, ~¥140‑150.<br>
+    <strong>Metro</strong>: Line 10 → at <strong>Xintiandi Station</strong> transfer to <strong>Line 13</strong> → get off at <strong>Zhongke Road Station</strong>, Exit 5. Then about 800m to the hotel. ~1h14min.</p>
+
+    <h3 style="font-weight:500; margin:1rem 0 0.5rem;">🔗 Useful links</h3>
+    <p>• <a href="http://service.shmetro.com/en/yxxlt/index.htm" target="_blank" rel="noopener noreferrer">Shanghai Metro official site</a><br>
+    • Hotel address: No. 550 Haike Road, Pudong New Area, Shanghai, China (Aloft Shanghai Zhangjiang Haike)</p>
+  </section>
   
   <footer class="footer-note">ShanghaiTech University · Quantum Geometry · 2026</footer>
 </main>
