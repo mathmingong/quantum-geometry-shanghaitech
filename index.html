@@ -245,6 +245,7 @@
       width: 90%;
       box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
       border: 1px solid #e2edf5;
+      white-space: normal;
     }
 
     .modal h3 {
@@ -256,6 +257,13 @@
       padding-bottom: 0.5rem;
     }
 
+    .modal .modal-content {
+      white-space: pre-wrap;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 1rem 0;
+    }
+
     .modal button {
       background: transparent;
       border: 1px solid #7fa1c3;
@@ -265,6 +273,7 @@
       cursor: pointer;
       display: block;
       margin-left: auto;
+      margin-top: 1rem;
     }
 
     .footer-note {
@@ -311,12 +320,18 @@
 </head>
 <body>
 <div class="backdrop"><div class="blur-layer"></div><div class="blur-layer-2"></div></div>
-<div class="modal-overlay" id="modalOverlay"><div class="modal"><h3 id="modalName">Speaker</h3><p id="modalBio"></p><button id="modalCloseBtn">close</button></div></div>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalName">Speaker</h3>
+    <div class="modal-content" id="modalBio"></div>
+    <button id="modalCloseBtn">close</button>
+  </div>
+</div>
 
 <main class="main-content">
   <header class="page-header">
     <h1>Quantum geometry: from invariants to categories, and back.</h1>
-    <div class="subhead"><span>📅 July 5–10, 2026</span><span>📍 ShanghaiTech University</span></div>
+    <div class="subhead"><span>📅 July 6–10, 2026</span><span>📍 ShanghaiTech University</span></div>
   </header>
 
   <section class="info-section"><h2>📐 About</h2><p class="lead-text">The conference aims to bring together scholars working on enumerative invariants, 
@@ -326,32 +341,33 @@
 <strong>Organizers:</strong> Qile Chen (Boston College), Bohan Fang (Peking University), Yunfeng Jiang (University of Kansas), Junwu Tu (ShanghaiTech).<br>
 </section>
 
+  <!-- 演讲者列表：每个按钮包含 data-name, data-title, data-abstract -->
   <section class="info-section">
     <h2>👥 Speakers (Updating)</h2>
     <p><em>🔆 Click name for the talk information.</em></p>
     <ul class="speaker-list" id="participantList">
-      <li><button class="participant-link" data-name="Lino Amorim">Lino Amorim</button> <span class="affiliation">(Kansas State University)</span></li>
-      <li><button class="participant-link" data-name="Christ Brav">Christ Brav</button> <span class="affiliation">(SIMIS, Shanghai)</span></li>
-      <li><button class="participant-link" data-name="Andrei Caldararu">Andrei Căldăraru</button> <span class="affiliation">(UW Madison)</span></li>
-      <li><button class="participant-link" data-name="Kwok-Wai Chan">Kwok-Wai Chan</button> <span class="affiliation">(Chinese University of Hong Kong)</span></li>
-      <li><button class="participant-link" data-name="Yash Deshmukh">Yash Deshmukh</button> <span class="affiliation">(IAS Princeton)</span></li>
-      <li><button class="participant-link" data-name="Huijun Fan">Huijun Fan</button> <span class="affiliation">(Wuhan University)</span></li>
-      <li><button class="participant-link" data-name="Sheel Ganatra">Sheel Ganatra</button> <span class="affiliation">(USC)</span></li>
-      <li><button class="participant-link" data-name="Ezra Getzler">Ezra Getzler</button> <span class="affiliation">(Northwestern)</span></li>
-      <li><button class="participant-link" data-name="Jianxun Hu">Jianxun Hu</button> <span class="affiliation">(Sun Yat-Sen)</span></li>
-      <li><button class="participant-link" data-name="Kai Hugtenburg">Kai Hugtenburg</button> <span class="affiliation">(University of St Andrews)</span></li>
-      <li><button class="participant-link" data-name="Si Li">Si Li</button> <span class="affiliation">(Tsinghua University)</span></li>
-      <li><button class="participant-link" data-name="Patrick Lei">Patrick Lei</button> <span class="affiliation">(Boston College)</span></li>
-      <li><button class="participant-link" data-name="Conan Leung">Conan Leung (TBC) </button> <span class="affiliation">(Chinese University of Hong Kong)</span></li>
-      <li><button class="participant-link" data-name="Emanuele Macri">Emanuele Macrì</button> <span class="affiliation">(Paris-Saclay)</span></li>
-      <li><button class="participant-link" data-name="Samouil Molcho">Samouil Molcho</button> <span class="affiliation">(ETH Zurich)</span></li>
-      <li><button class="participant-link" data-name="Dhruv Ranganathan">Dhruv Ranganathan</button> <span class="affiliation">(Cambridge)</span></li>
-      <li><button class="participant-link" data-name="Yongbin Ruan">Yongbin Ruan (TBC) </button> <span class="affiliation">(IASM, Zhejiang University)</span></li>
-      <li><button class="participant-link" data-name="Yefeng Shen">Yefeng Shen</button> <span class="affiliation">(University of Oregon)</span></li>
-      <li><button class="participant-link" data-name="Vivek Shende">Vivek Shende</button> <span class="affiliation">(Southern Denmark)</span></li>
-      <li><button class="participant-link" data-name="Fenglong You">Fenglong You</button> <span class="affiliation">(QMUL)</span></li>
-      <li><button class="participant-link" data-name="Zijun Zhou">Zijun Zhou</button> <span class="affiliation">(Shanghai Jiaotong University)</span></li>
-      <li><button class="participant-link" data-name="Zhengyu Zong">Zhengyu Zong</button> <span class="affiliation">(Tsinghua University)</span></li>
+      <li><button class="participant-link" data-name="Lino Amorim" data-title="TBA" data-abstract="TBA">Lino Amorim</button> <span class="affiliation">(Kansas State University)</span></li>
+      <li><button class="participant-link" data-name="Christ Brav" data-title="TBA" data-abstract="TBA">Christ Brav</button> <span class="affiliation">(SIMIS, Shanghai)</span></li>
+      <li><button class="participant-link" data-name="Andrei Caldararu" data-title="TBA" data-abstract="TBA">Andrei Căldăraru</button> <span class="affiliation">(UW Madison)</span></li>
+      <li><button class="participant-link" data-name="Kwok-Wai Chan" data-title="TBA" data-abstract="TBA">Kwok-Wai Chan</button> <span class="affiliation">(Chinese University of Hong Kong)</span></li>
+      <li><button class="participant-link" data-name="Yash Deshmukh" data-title="TBA" data-abstract="TBA">Yash Deshmukh</button> <span class="affiliation">(IAS Princeton)</span></li>
+      <li><button class="participant-link" data-name="Huijun Fan" data-title="TBA" data-abstract="TBA">Huijun Fan</button> <span class="affiliation">(Wuhan University)</span></li>
+      <li><button class="participant-link" data-name="Sheel Ganatra" data-title="TBA" data-abstract="TBA">Sheel Ganatra</button> <span class="affiliation">(USC)</span></li>
+      <li><button class="participant-link" data-name="Ezra Getzler" data-title="TBA" data-abstract="TBA">Ezra Getzler</button> <span class="affiliation">(Northwestern)</span></li>
+      <li><button class="participant-link" data-name="Jianxun Hu" data-title="TBA" data-abstract="TBA">Jianxun Hu</button> <span class="affiliation">(Sun Yat-Sen)</span></li>
+      <li><button class="participant-link" data-name="Kai Hugtenburg" data-title="TBA" data-abstract="TBA">Kai Hugtenburg</button> <span class="affiliation">(University of St Andrews)</span></li>
+      <li><button class="participant-link" data-name="Si Li" data-title="TBA" data-abstract="TBA">Si Li</button> <span class="affiliation">(Tsinghua University)</span></li>
+      <li><button class="participant-link" data-name="Patrick Lei" data-title="TBA" data-abstract="TBA">Patrick Lei</button> <span class="affiliation">(Boston College)</span></li>
+      <li><button class="participant-link" data-name="Conan Leung" data-title="TBA" data-abstract="TBA">Conan Leung (TBC)</button> <span class="affiliation">(Chinese University of Hong Kong)</span></li>
+      <li><button class="participant-link" data-name="Emanuele Macri" data-title="TBA" data-abstract="TBA">Emanuele Macrì</button> <span class="affiliation">(Paris-Saclay)</span></li>
+      <li><button class="participant-link" data-name="Samouil Molcho" data-title="TBA" data-abstract="TBA">Samouil Molcho</button> <span class="affiliation">(ETH Zurich)</span></li>
+      <li><button class="participant-link" data-name="Dhruv Ranganathan" data-title="TBA" data-abstract="TBA">Dhruv Ranganathan</button> <span class="affiliation">(Cambridge)</span></li>
+      <li><button class="participant-link" data-name="Yongbin Ruan" data-title="TBA" data-abstract="TBA">Yongbin Ruan (TBC)</button> <span class="affiliation">(IASM, Zhejiang University)</span></li>
+      <li><button class="participant-link" data-name="Yefeng Shen" data-title="TBA" data-abstract="TBA">Yefeng Shen</button> <span class="affiliation">(University of Oregon)</span></li>
+      <li><button class="participant-link" data-name="Vivek Shende" data-title="TBA" data-abstract="TBA">Vivek Shende</button> <span class="affiliation">(Southern Denmark)</span></li>
+      <li><button class="participant-link" data-name="Fenglong You" data-title="TBA" data-abstract="TBA">Fenglong You</button> <span class="affiliation">(QMUL)</span></li>
+      <li><button class="participant-link" data-name="Zijun Zhou" data-title="TBA" data-abstract="TBA">Zijun Zhou</button> <span class="affiliation">(Shanghai Jiaotong University)</span></li>
+      <li><button class="participant-link" data-name="Zhengyu Zong" data-title="All genus Crepant Transformation Conjecture for toric Calabi-Yau 3-orbifolds" data-abstract="The Crepant Transformation Conjecture, proposed by Ruan, asserts certain equivalence between Gromov-Witten theory of two manifolds/orbifolds which are related by a crepant transformation. In general, the higher genus Crepant Transformation Conjecture is quite hard to study. Even the formulation of the Crepant Transformation Conjecture in the higher genus case is subtle. In this talk, I will explain the proof of the all genus Crepant Transformation Conjecture for general toric Calabi-Yau 3-orbifolds. We will consider the all genus open, closed, descendant Gromov-Witten theory of toric Calabi-Yau 3-orbifolds. This talk is based on a project joint with Bohan Fang, Chiu-Chu Melissa Liu, and Song Yu.">Zhengyu Zong</button> <span class="affiliation">(Tsinghua University)</span></li>
     </ul>
   </section>
 
@@ -371,7 +387,8 @@
   </section>
 
   <section class="info-section">
-    <h2>📍 Venue</h2>    <div class="venue-details">
+    <h2>📍 Venue</h2>
+    <div class="venue-details">
       <p><strong> Conference Room:</strong> ShanghaiTech University Campus (details to be announced). <br>
       <strong>Conference dinner:</strong> Wednesday Night (details to be announced). <br>
       </p>
@@ -389,7 +406,7 @@
      </p>
   </section>
 
-  <!-- Transportation section (taxi note, only airports, destination = hotel) -->
+  <!-- Transportation section (only airports, destination = hotel, with taxi note) -->
   <section class="info-section">
     <h2>🚆 Transportation to Hotel</h2>
     <h3 style="font-weight:500; margin: 1rem 0 0.5rem;">✨ Quick overview</h3>
@@ -433,18 +450,26 @@
     const modalName = document.getElementById('modalName');
     const modalBio = document.getElementById('modalBio');
     const closeBtn = document.getElementById('modalCloseBtn');
-    function showModal(name) {
+    
+    function showModal(btn) {
+      const name = btn.getAttribute('data-name') || btn.textContent.replace(/\*/g,'').trim();
+      let title = btn.getAttribute('data-title') || 'TBA';
+      let abstract = btn.getAttribute('data-abstract') || 'TBA';
       modalName.textContent = name;
-      modalBio.textContent = `📌 ${name}: TBA (talk title and abstract to be announced).`;
+      // 不再重复显示 Name，只显示 Title 和 Abstract，两者之间空一行
+      modalBio.textContent = `Title: ${title}\n\nAbstract: ${abstract}`;
       overlay.style.display = 'flex';
     }
+    
     function closeModal() { overlay.style.display = 'none'; }
+    
     document.querySelectorAll('.participant-link').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        showModal(btn.getAttribute('data-name') || btn.textContent.replace(/\*/g,'').trim());
+        showModal(btn);
       });
     });
+    
     closeBtn.addEventListener('click', closeModal);
     overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.style.display === 'flex') closeModal(); });
